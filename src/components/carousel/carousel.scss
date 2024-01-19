@@ -1,0 +1,39 @@
+.slick-prev:before {
+  display: none !important;
+}
+.slick-next:before {
+  display: none !important;
+}
+.carousel-element {
+  height: 600px;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+.carousel-track-element {
+  height: 250px;
+  width: 100px;
+  border-radius: 10px;
+background-color: aquamarine;
+ 
+}
+.slick-dots {
+  margin-bottom: 30px !important;
+}
+.slick-active {
+}
+.slick-dots {
+  li {
+    button:before {
+      font-size: 16px;
+    }
+  }
+}
+/* the slides */
+//  .slick-slide {
+//     margin: 0 27px;
+// }
+
+/* the parent */
