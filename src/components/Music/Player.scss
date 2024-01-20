@@ -1,49 +1,64 @@
-// $rhap_theme-color: #dc1414 !default;   // Color of all buttons and volume/progress indicators
-// $rhap_background-color: #cb1717 !default; // Color of the player background
-// $rhap_bar-color: #e4e4e4 !default;     // Color of volume and progress bar
-// $rhap_time-color: #333 !default;       // Font color of current time and duration
-// $rhap_font-family: inherit !default; 
-
+$rhap-container-bg: #f7f7f9;
+$rhap-controls-margin-bottom: 20px;
+$rhap-progress-height: 20px;
+$rhap-main-controls-width: 60px !important;
+$rhap-main-controls-height: 40px !important;
+$rhap-main-controls-svg-color: #FB6F92;
+$rhap-progress-filled-bg: #FB6F92 !important;
+$rhap-volume-button-color: #FB6F92 !important;
+$rhap-volume-bar-bg: #FB6F92;
 
 .rhap_container {
-    background: #f7f7f9;
-  }
-  
-  .rhap_controls-section {
-    margin-bottom: 0px;
-  }
-  
-  .rhap_progress-section {
-    height: 20px;
-    
-  }
-  
-  .rhap_main-controls-button {
-    width: 80px !important;
-    height: 50px !important;
-  }
-  
-  .rhap_main-controls-button {
-    width: 50px;
-    height: 50px;
-    display: block;
-  }
-  
-  .rhap_main-controls-button svg {
-    color: #FB6F92;
+  background: $rhap-container-bg;
+}
+
+.rhap_controls-section {
+  margin-bottom: $rhap-controls-margin-bottom;
+}
+
+.rhap_progress-section {
+  height: $rhap-progress-height;
+}
+.rhap_main-controls{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+}
+.rhap_main-controls-button {
+  width: $rhap-main-controls-width;
+  height: $rhap-main-controls-height;
+  display: block;
+
+  svg {
+    color: $rhap-main-controls-svg-color;
     width: 80%;
     height: 80%;
   }
-  .rhap_progress-filled,
-  .rhap_progress-indicator {
+}
+
+.rhap_progress-filled,
+.rhap_progress-indicator {
+  background-color: $rhap-progress-filled-bg !important;
+}
+
+.rhap_button-clear.rhap_volume-button {
+  color: $rhap-volume-button-color !important;
+ 
+}
+.rhap_button-clear.rhap_main-controls-button.rhap_forward-button{
+    display: flex;
+  align-items: center;
+  justify-content: center;
   
-    background-color: #FB6F92 !important;
-  }
+}
+.rhap_button-clear.rhap_main-controls-button.rhap_rewind-button{
+   display: flex;
+  align-items: center;
+  justify-content: center;
   
-  .rhap_button-clear.rhap_volume-button {
-    color: #FB6F92 !important;
-  }
-  
-  .rhap_volume-bar, .rhap_volume-indicator {
-    background-color: #FB6F92;
-  }
+}
+.rhap_volume-bar,
+.rhap_volume-indicator {
+  background-color: $rhap-volume-bar-bg;
+}

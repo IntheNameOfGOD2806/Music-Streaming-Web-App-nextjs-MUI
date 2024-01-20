@@ -1,8 +1,11 @@
 import "./arrow.scss";
+import { useHasMounted } from "@/utils/customHook";
 const Arrow = (props) => {
+  
+ 
   return (
     <span class="btn-conteiner" style={props?.isPrev?{transform:`rotate(180deg)`}:{}}>
-      <span  className="btn-content">
+      <span  className="btn-content" style={{backgroundColor:"#FB6F92"}}>
         <span className="icon-arrow">
           <svg
            xmlnsXlink ="http://www.w3.org/1999/xlink"
@@ -16,7 +19,7 @@ const Arrow = (props) => {
             <g
               fill-rule="evenodd"
               fill="none"
-              stroke-width="1"
+              // stroke-width="1"
               stroke="none"
               id="arrow"
             >

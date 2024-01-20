@@ -7,4 +7,16 @@
       .slick-list {
         margin: 0 -10px;
       }
+      .slick-arrow{
+        top: 94px;
+        position: absolute;
+        &.slick-prev{
+            z-index: 999;
+        }
+        &.slick-next{
+          z-index: 999;
+            
+        }
+      }
+    
 }

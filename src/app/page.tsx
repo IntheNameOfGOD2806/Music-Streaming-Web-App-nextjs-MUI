@@ -1,12 +1,11 @@
 import Carousel from "@/components/carousel/carousel";
 import TrackCarousel from "@/components/carousel/trackCarousel";
-import PrimarySearchAppBar from "@/components/home/AppBar";
-import wretch from "wretch";
-import { sendRequestJS } from "../utils/old.api";
 import { sendRequest } from "../utils/api";
-
-
+import { useHasMounted } from "@/utils/customHook";
 export default async function HomePage() {
+
+ 
+  const apiInstance=process.env.NEXT_PUBLIC_BACKEND_URL
   // const api = wretch("http://localhost:8000/", { mode: "cors" })
   //   .errorType("json")
   //   .resolve((r) => r.json());
@@ -32,23 +31,37 @@ export default async function HomePage() {
   //   category: string;
   //   limit: number;
   // }
-  // const res2 = await sendRequest<IUser>({
-  //   url: "http://localhost:8000/api/v1/tracks/top",
-  //   method: "POST",
-  //   body: {
-  //     category: "CHILL",
-  //     limit: 10,
-  //   },
-  // });
-  // console.log(res2);
+  const res = await sendRequest<IBackendRes<ITrackTop[]>>({
+    url: `${apiInstance}api/v1/tracks/top`,
+    method: "POST",
+    body: {
+      category: "CHILL",
+      limit: 10,
+    },
+  });
+  const res1 = await sendRequest<IBackendRes<ITrackTop[]>>({
+    url: `${apiInstance}api/v1/tracks/top`,
+    method: "POST",
+    body: {
+      category: "WORKOUT",
+      limit: 10,
+    },
+  });
+  console.log(res);
 
   return (
     <>
       <div style={{ width: "100%", margin: "auto" }}>
         <Carousel />
-        <div style={{ width: "90%", margin: "auto" }}>
-          <TrackCarousel />
-          <TrackCarousel />
+        <div style={{ width: "80%", margin: "auto" }}>
+          <TrackCarousel
+            title={"Chill Playlist"}
+            data={res?.data ? res.data : []}
+          />
+          <TrackCarousel
+            title={"Workout Playlist"}
+            data={res1?.data ? res1.data : []}
+          />
         </div>
       </div>
     </>

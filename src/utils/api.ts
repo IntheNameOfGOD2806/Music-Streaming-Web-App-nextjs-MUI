@@ -1,6 +1,5 @@
 import queryString from 'query-string';
-
-export const sendRequest = async <T>(props: any) => {
+export const sendRequest = async <T>(props: IRequest) => {
     let {
         url,
         method,
@@ -10,7 +9,6 @@ export const sendRequest = async <T>(props: any) => {
         headers = {},
         nextOption = {}
     } = props;
-
     const options: any = {
         method: method,
         // by default setting the content-type to be json type
@@ -19,11 +17,9 @@ export const sendRequest = async <T>(props: any) => {
         ...nextOption
     };
     if (useCredentials) options.credentials = "include";
-
     if (queryParams) {
         url = `${url}?${queryString.stringify(queryParams)}`;
     }
-
     return fetch(url, options).then(res => {
         if (res.ok) {
             return res.json() as T;

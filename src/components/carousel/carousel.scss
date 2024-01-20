@@ -5,7 +5,7 @@
   display: none !important;
 }
 .carousel-element {
-  height: 600px;
+  height: 500px;
 
   img {
     width: 100%;
@@ -13,10 +13,15 @@
   }
 }
 .carousel-track-element {
-  height: 250px;
+  height: 200px;
   width: 100px;
-  border-radius: 10px;
-background-color: aquamarine;
+
+
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+  }
  
 }
 .slick-dots {
@@ -37,3 +42,14 @@ background-color: aquamarine;
 // }
 
 /* the parent */
+.slick-arrow{
+ 
+  position: absolute;
+  &.slick-prev{
+      z-index: 999;
+  }
+  &.slick-next{
+    z-index: 999;
+      
+  }
+}
