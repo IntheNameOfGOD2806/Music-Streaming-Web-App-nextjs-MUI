@@ -1,7 +1,6 @@
 import Carousel from "@/components/carousel/carousel";
 import TrackCarousel from "@/components/carousel/trackCarousel";
 import { sendRequest } from "../utils/api";
-import { useHasMounted } from "@/utils/customHook";
 export default async function HomePage() {
 
  
@@ -59,6 +58,14 @@ export default async function HomePage() {
             data={res?.data ? res.data : []}
           />
           <TrackCarousel
+            title={"Workout Playlist"}
+            data={res1?.data ? res1.data : []}
+          />
+            <TrackCarousel
+            title={"Workout Playlist"}
+            data={res1?.data ? res1.data : []}
+          />
+            <TrackCarousel
             title={"Workout Playlist"}
             data={res1?.data ? res1.data : []}
           />

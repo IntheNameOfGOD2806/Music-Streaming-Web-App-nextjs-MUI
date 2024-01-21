@@ -17,7 +17,9 @@
     "@emotion/styled": "11.11.0",
     "@mui/icons-material": "5.14.7",
     "@mui/material": "5.14.7",
+    "@wavesurfer/react": "^1.0.4",
     "next": "^13.4.20-canary.35",
+    "qs": "^6.11.2",
     "query-string": "^8.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -31,6 +33,7 @@
   },
   "devDependencies": {
     "@types/node": "20.5.9",
+    "@types/qs": "^6.9.11",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
     "@types/react-slick": "^0.23.13",
