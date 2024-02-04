@@ -1,7 +1,7 @@
 {
-  "name": "nextjs-mui-ts-template-by-hoidanit",
-  "author": "Hỏi Dân IT với Eric",
-  "description": "https://www.youtube.com/@hoidanit",
+  "name": "nextjs-mui-ts-template",
+  "author": "dat",
+  "description": "",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -19,6 +19,7 @@
     "@mui/material": "5.14.7",
     "@wavesurfer/react": "^1.0.4",
     "next": "^13.4.20-canary.35",
+    "next-auth": "^4.24.5",
     "qs": "^6.11.2",
     "query-string": "^8.1.0",
     "react": "18.2.0",
@@ -32,14 +33,14 @@
     "wretch": "^2.8.0"
   },
   "devDependencies": {
-    "@types/node": "20.5.9",
     "@types/qs": "^6.9.11",
+    "@types/node": "20.5.9",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
-    "@types/react-slick": "^0.23.13",
-    "@types/slick-carousel": "^1.6.40",
     "eslint": "8.48.0",
+    "typescript": "5.2.2",
     "eslint-config-next": "13.4.19",
-    "typescript": "5.2.2"
+    "@types/react-slick": "^0.23.13",
+    "@types/slick-carousel": "^1.6.40"
   }
 }

@@ -1,14 +1,16 @@
 import queryString from 'query-string';
-export const sendRequest = async <T>(props: IRequest) => {
+export const sendRequest = async <T>(optionsP: IRequest) => {
     let {
+        // url 
         url,
+        // 
         method,
         body,
         queryParams = {},
         useCredentials = false,
         headers = {},
         nextOption = {}
-    } = props;
+    } = optionsP;
     const options: any = {
         method: method,
         // by default setting the content-type to be json type

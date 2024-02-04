@@ -1,3 +1,4 @@
+"use client";
 import Logout from "@mui/icons-material/Logout";
 import PersonAdd from "@mui/icons-material/PersonAdd";
 import Settings from "@mui/icons-material/Settings";
@@ -10,8 +11,9 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
+import { signOut, useSession } from "next-auth/react";
+import Link from "next/link";
 import * as React from "react";
-import Link from 'next/link'
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -21,14 +23,57 @@ export default function AccountMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const { data: session } = useSession();
+  console.log(session);
   return (
     <React.Fragment>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
-        <Typography sx={{ minWidth: 100,":hover":{opacity:"0.5"} }}> <Link  style={{ textDecoration: 'none',color:"white", }} href="/playlist">PlayList</Link></Typography>
-        <Typography sx={{ minWidth: 100,":hover":{opacity:"0.5"} }}> <Link  style={{ textDecoration: 'none',color:"white", }} href="/liked">Liked</Link></Typography>
-        <Typography sx={{ minWidth: 100,":hover":{opacity:"0.5"} }}> <Link  style={{ textDecoration: 'none',color:"white", }} href="/upload">Upload</Link></Typography>
+       {session &&
+       <>
+        <Typography sx={{ minWidth: 100, ":hover": { opacity: "0.5" } }}>
+          {" "}
+          <Link
+            style={{ textDecoration: "none", color: "white" }}
+            href="/playlist"
+          >
+            PlayList
+          </Link>
+        </Typography>
+        <Typography sx={{ minWidth: 100, ":hover": { opacity: "0.5" } }}>
+          {" "}
+          <Link
+            style={{ textDecoration: "none", color: "white" }}
+            href="/liked"
+          >
+            Liked
+          </Link>
+        </Typography>
+        <Typography sx={{ minWidth: 100, ":hover": { opacity: "0.5" } }}>
+          {" "}
+          <Link
+            style={{ textDecoration: "none", color: "white" }}
+            href="/upload"
+          >
+            Upload
+          </Link>
+        </Typography>
+       </>
+       }
+       {
+        !session &&
+        <Typography sx={{ minWidth: 100, ":hover": { opacity: "0.5" } }}>
+          {" "}
+          <Link
+            style={{ textDecoration: "none", color: "white" }}
+            href="/api/auth/signin"
+          >
+            Login
+          </Link>
+        </Typography>
+       }
 
-        <Tooltip title="Account settings"> 
+        <Tooltip title="Account settings">
           <IconButton
             onClick={handleClick}
             size="small"
@@ -95,7 +140,7 @@ export default function AccountMenu() {
           </ListItemIcon>
           Settings
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={ () => signOut()}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>

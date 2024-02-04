@@ -17,6 +17,7 @@ import { alpha, styled } from "@mui/material/styles";
 import * as React from "react";
 import { useRouter } from "next/navigation";
 import AccountMenu from "./AccountMenu";
+import { useSession } from "next-auth/react";
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -58,6 +59,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function PrimarySearchAppBar() {
+  const { data: session } = useSession();
+  console.log(session);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [
     mobileMoreAnchorEl,

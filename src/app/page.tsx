@@ -1,8 +1,11 @@
 import Carousel from "@/components/carousel/carousel";
 import TrackCarousel from "@/components/carousel/trackCarousel";
+import { getServerSession } from "next-auth/next";
 import { sendRequest } from "../utils/api";
-export default async function HomePage() {
-
+import { authOptions } from "./api/auth/[...nextauth]/route";
+export default async function HomePage( context: any) {
+  const session = await getServerSession(authOptions)
+  console.log(session);
  
   const apiInstance=process.env.NEXT_PUBLIC_BACKEND_URL
   // const api = wretch("http://localhost:8000/", { mode: "cors" })
@@ -30,6 +33,7 @@ export default async function HomePage() {
   //   category: string;
   //   limit: number;
   // }
+
   const res = await sendRequest<IBackendRes<ITrackTop[]>>({
     url: `${apiInstance}api/v1/tracks/top`,
     method: "POST",
