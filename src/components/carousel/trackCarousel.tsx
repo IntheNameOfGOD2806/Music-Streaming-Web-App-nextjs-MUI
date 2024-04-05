@@ -1,14 +1,11 @@
 "use client";
+import Link from "next/link";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import Arrow from "../navbutton/arrow";
 import "./carousel.scss";
 import "./trackCarousel.scss";
-import { useHasMounted } from "@/utils/customHook";
-import { useEffect } from "react";
-import { useState } from "react";
-import Link from "next/link";
 function SampleNextArrow(props: any) {
   const { className, style, onClick } = props;
   return (
@@ -46,7 +43,7 @@ interface Iprops {
   data: ITrackTop[];
 }
 const TrackCarousel = (props: Iprops) => {
-  console.log(props);
+  // console.log(props);
   const settings = {
     infinite: true,
     slidesToShow: 4,

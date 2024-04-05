@@ -22,6 +22,12 @@ declare module "next-auth" {
         user: UserType
 
     }
+     interface DefaultUser {
+        access_token: string
+        refresh_token: string
+        user: UserType
+      }
+      
 
 
 }

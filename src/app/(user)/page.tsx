@@ -1,45 +1,22 @@
 import Carousel from "@/components/carousel/carousel";
 import TrackCarousel from "@/components/carousel/trackCarousel";
 import { getServerSession } from "next-auth/next";
-import { sendRequest } from "../utils/api";
-import { authOptions } from "./api/auth/[...nextauth]/route";
+import { sendRequest } from "../../utils/api";
+import { authOptions } from "../api/auth/[...nextauth]/route";
+
 export default async function HomePage( context: any) {
   const session = await getServerSession(authOptions)
   console.log(session);
  
   const apiInstance=process.env.NEXT_PUBLIC_BACKEND_URL
-  // const api = wretch("http://localhost:8000/", { mode: "cors" })
-  //   .errorType("json")
-  //   .resolve((r) => r.json());
-  // //
-  // const res = await api.url("api/v1/tracks/top").post({
-  //   category: "CHILL",
-  //   limit: 10,
-  // });
-  // console.log(res);
-  // //////////////////////////////
-  // const res1 = await sendRequestJS({
-  //   url: "http://localhost:8000/api/v1/tracks/top",
-  //   method: "POST",
-  //   body: {
-  //     category: "CHILL",
-  //     limit: 10,
-  //   },
-  // });
-  // console.log(res1);
-
-  // ///////////////////////////////////
-  // interface IUser {
-  //   category: string;
-  //   limit: number;
-  // }
-
+ 
+ 
   const res = await sendRequest<IBackendRes<ITrackTop[]>>({
     url: `${apiInstance}api/v1/tracks/top`,
     method: "POST",
     body: {
       category: "CHILL",
-      limit: 10,
+      limit: 20,
     },
   });
   const res1 = await sendRequest<IBackendRes<ITrackTop[]>>({
@@ -47,10 +24,18 @@ export default async function HomePage( context: any) {
     method: "POST",
     body: {
       category: "WORKOUT",
-      limit: 10,
+      limit: 20,
     },
   });
-  console.log(res);
+  const res2 = await sendRequest<IBackendRes<ITrackTop[]>>({
+    url: `${apiInstance}api/v1/tracks/top`,
+    method: "POST",
+    body: {
+      category: "PARTY",
+      limit: 20,
+    },
+  });
+  // console.log(res);
 
   return (
     <>
@@ -66,13 +51,10 @@ export default async function HomePage( context: any) {
             data={res1?.data ? res1.data : []}
           />
             <TrackCarousel
-            title={"Workout Playlist"}
-            data={res1?.data ? res1.data : []}
+            title={"Party Playlist"}
+            data={res2?.data ? res2.data : []}
           />
-            <TrackCarousel
-            title={"Workout Playlist"}
-            data={res1?.data ? res1.data : []}
-          />
+          
         </div>
       </div>
     </>

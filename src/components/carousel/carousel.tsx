@@ -5,6 +5,8 @@ import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import Arrow from "../navbutton/arrow";
 import "./carousel.scss";
+import TrackContext, { initValue, ITrackContext } from "@/lib/TrackContext";
+import { useContext, useEffect } from "react";
 
 function SampleNextArrow(props: any) {
   const { className, style, onClick } = props;
@@ -33,6 +35,10 @@ function SamplePrevArrow(props: any) {
 }
 
 const Carousel = () => {
+  // const { track, setTrack } = useContext(TrackContext) as ITrackContext;
+  // useEffect(() => {
+  //   setTrack(initValue);
+  // }, []);
   const settings = {
     dots: true,
     infinite: true,

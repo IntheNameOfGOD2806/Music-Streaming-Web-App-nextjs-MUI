@@ -46,6 +46,42 @@ declare global {
         updatedAt: string;
     }
 }
+export interface IComment {
+    _id: string;
+    content: string;
+    moment: number;
+    user: {
+        _id: string;
+        email: string;
+        name: string;
+        role: string;
+        type: string;
+    };
+    track: {
+        _id: string;
+        title: string;
+        description: string;
+        trackUrl: string;
+    };
+    isDeleted: boolean;
+    __v: number;
+    createdAt: string;
+    updatedAt: string;
+}
+
+export interface IComments {
+    meta: {
+        current: number,
+        pageSize: number,
+        pages: number,
+        total: number
+    },
+    result: IComment[]
+}
+export interface ITrackTopCustom extends ITrackTop {
+    isPlaying: boolean
+    progress?: number
+}
 ////
 interface TrackListResponse {
     data: Track[];

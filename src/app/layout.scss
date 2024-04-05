@@ -1,24 +1,81 @@
-.music-player{
+:root {
+    --background: rgb(134, 141, 156);
+    --banner-background: rgb(55, 21, 225);
+    --white-alpha-20: hsla(0, 0%, 100%, 0.2);
+    --on-background: hsla(220, 100%, 95%, 1);
+    --on-surface: hsla(250, 100%, 95%, 1);
+    --on-surface-variant: hsla(250, 1%, 44%, 1);
+    --primary: hsla(349, 100%, 43%, 1);
+    --primary-variant: hsla(349, 69%, 51%, 1);
+    --rating-color: hsla(44, 100%, 49%, 1);
+    --surface: hsla(250, 13%, 11%, 1);
+    --text-color: hsla(250, 2%, 59%, 1);
+    --white: hsla(0, 0%, 100%, 1);
+    /* gradient color */
+    --banner-overlay: 90deg, hsl(220, 17%, 7%) 0%, hsla(220, 17%, 7%, 0.5) 100%;
+    --bottom-overlay: 180deg, hsla(250, 13%, 11%, 0), hsla(250, 13%, 11%, 1);
+    /* typegraphy */
+    /* font */
+    --ff-dm-sans: 'DM Sans', sans-serif;
+    --fs-heading: 4rem;
+    --fs-title-lg: 2.6rem;
+    --fs-title: 2rem;
+    --fs-body: 1.8rem;
+    --fs-button: 1.5rem;
+    --fs-label: 1.4rem;
+    /* font weight */
+    --weight-bold: 700;
+    /* shadow */
+    --shadow-1: 0 1px 4px hsla(0, 0%, 0%, 0.75);
+    --shadow-2: 0 2px 4px hsla(350, 100%, 43%, 0.3);
+    /* border radius */
+    --radius-4: 4px;
+    --radius-8: 8px;
+    --radius-16: 16px;
+    --radius-24: 24px;
+    --radius-36: 36px;
+    /* transition */
+    --transition-short: 250ms ease;
+    --transition-long: 500ms ease;
+  }
   
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    z-index: 99999;
-    height: 100px !important;
+.music-player {
+  position: fixed;
+  bottom: -8px;
+  left: 0;
+  width: 100%;
+  z-index: 99999;
+  height: 100px !important;
 }
-.music-player-author{
-    background-color: #f7f7f9;
-    height: auto;
-    width: 20%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    
-    // text-align: center;
+.music-player-author {
+  background-color: #ffffff;
+  height: auto;
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  // text-align: center;
 }
 
-body{
-    padding-bottom: 60px;
+body {
+  padding-bottom: 90px;
+ 
+}
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background-color: #FB6F92;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #1B427B;
+    border-radius: var(--radius-8);
+  }
+  .rhap_container {
+    background: #ffffff;
 }

@@ -1,0 +1,79 @@
+.track-banner-container {
+    background-image: url("https://media.istockphoto.com/id/1133752390/vi/anh/n%E1%BB%81n-m%E1%BB%81m-tr%E1%BB%ABu-t%C6%B0%E1%BB%A3ng.jpg?s=2048x2048&w=is&k=20&c=_LwLZdEmfNrrA5cFKiAY3f_hygFVA1coLIks3CjrNok=");
+    height: 400px;
+    display: flex;
+    justify-content: space-between;
+    background-size: cover;
+    position: relative;
+  }
+  .wavetrack-container {
+    position: relative;
+    bottom: -200px;
+    width: 63%;
+    height: fit-content;
+    padding-left: 10px;
+  }
+  .image-container {
+    width: 34%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0px;
+  }
+  .image-container img {
+    max-width: fit-content;
+    max-height: fit-content;
+    object-fit: fill;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+  }
+  .music-info {
+    background-color: aquas;
+    text-align: left;
+    position: absolute;
+    top:130px;
+    left: 500px;
+    color: aliceblue;
+    font-weight: 600;
+    font-size: 30px;
+  }
+  .author{
+    color: rgb(193, 200, 206);
+    font-weight: 400;
+    font-size: 30px;
+  }
+  body{
+    padding-bottom: 600px;
+  }
+  .like-section{
+    height: 40px;
+    // background-color: aqua;
+    width: 100%;
+    display: flex;
+  justify-content: space-between;
+    margin-top: 20px;
+  }
+  paper-button {
+    text-transform: none;
+  }
+  .like-section-right{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    .play-count{
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 14px;
+      font-weight: 500
+    }
+    .like-count{
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 14px;
+      font-weight: 500
+    }
+  }

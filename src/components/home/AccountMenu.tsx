@@ -14,18 +14,29 @@ import Typography from "@mui/material/Typography";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import * as React from "react";
+import { useRouter } from "next/navigation";
+import { getAvatar } from "@/utils/api";
+
 export default function AccountMenu() {
+  const { data: session } = useSession();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
+
+  const navigate = useRouter();
+  const handleNavigateProfile = () => {
+    
+     
+      navigate.push("/profile/" + session?.user?._id);
+    
+  };
   const handleClose = () => {
     setAnchorEl(null);
   };
 
-  const { data: session } = useSession();
-  console.log(session);
+  // console.log(session);
   return (
     <React.Fragment>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
@@ -53,7 +64,7 @@ export default function AccountMenu() {
           {" "}
           <Link
             style={{ textDecoration: "none", color: "white" }}
-            href="/upload"
+            href="/track/upload"
           >
             Upload
           </Link>
@@ -82,7 +93,11 @@ export default function AccountMenu() {
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            <Avatar sx={{ width: 32, height: 32 }}>DA</Avatar>
+            <Avatar
+            src={`${getAvatar(session?.user.type as string)}`}
+            sx={{ width: 32, height: 32 }}>
+              {/* <img style={{objectFit:"contain"}} src={getAvatar("GOOGLE")} alt="" /> */}
+            </Avatar>
           </IconButton>
         </Tooltip>
       </Box>
@@ -121,7 +136,7 @@ export default function AccountMenu() {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handleNavigateProfile}>
           <Avatar /> Profile
         </MenuItem>
         <MenuItem onClick={handleClose}>
