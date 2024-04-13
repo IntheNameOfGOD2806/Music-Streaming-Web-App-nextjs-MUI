@@ -16,6 +16,43 @@ declare global {
         statusCode: number | string;
         data?: T;
     }
+    /////
+    interface Meta {
+        current: number;
+        pageSize: number;
+        pages: number;
+        total: number;
+    }
+    
+    interface Track {
+        _id: string;
+        title: string;
+        description: string;
+        category: string;
+        imgUrl: string;
+        trackUrl: string;
+        countLike: number;
+        countPlay: number;
+    }
+    
+    interface ResultItem {
+        _id: string;
+        title: string;
+        isPublic: boolean;
+        user: string;
+        tracks: Track[];
+        isDeleted: boolean;
+        createdAt: string;
+        updatedAt: string;
+        __v: number;
+        isOpenDeleteDialog?: boolean
+    }
+    
+    interface PlayListData {
+        meta: Meta;
+        result: ResultItem[];
+    }
+//////////////////////    
     interface IModelPaginate<T> {
         meta: {
             current: number;
@@ -44,6 +81,7 @@ declare global {
         isDeleted: boolean;
         createdAt: string;
         updatedAt: string;
+        isPlaying?: boolean
     }
 }
 export interface IComment {
@@ -79,7 +117,7 @@ export interface IComments {
     result: IComment[]
 }
 export interface ITrackTopCustom extends ITrackTop {
-    isPlaying: boolean
+    isPlaying?: boolean
     progress?: number
 }
 ////

@@ -1,6 +1,7 @@
 import MediaControlCard from "@/components/media-card/music.card.control";
 import { sendRequest } from "@/utils/api";
 import { Container } from "@mui/material";
+import { notFound } from "next/navigation";
 // import { useEffect, useState } from "react";
 
 import "./page.scss";
@@ -13,6 +14,9 @@ const profilePage = async ({
   params: { slug: string };
   searchParams?: { [key: string]: string | string[] | undefined };
 }) => {
+  if (!params.slug) {
+    notFound();
+  }
   async function getTracks() {
     const tracks = await sendRequest<IBackendRes<IModelPaginate<ITrackTop>>>({
       url: `${

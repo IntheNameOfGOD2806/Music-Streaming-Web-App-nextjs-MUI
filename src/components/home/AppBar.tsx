@@ -188,6 +188,11 @@ export default function PrimarySearchAppBar() {
               <StyledInputBase
                 placeholder="Search…"
                 inputProps={{ "aria-label": "search" }}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    router.push(`/search?q=${e.currentTarget.value}`);
+                  }
+                }}
               />
             </Search>
             <Box sx={{ flexGrow: 1 }} />

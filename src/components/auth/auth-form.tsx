@@ -7,7 +7,7 @@ import Snackbar from "@mui/material/Snackbar";
 import TextField from "@mui/material/TextField";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FaEye, FaEyeSlash, FaGithub } from "react-icons/fa";
 import { FaUnlockKeyhole } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
@@ -188,7 +188,7 @@ export default function AuthForm({ providers }: any) {
                       onClick={(e) => {
                         e.preventDefault();
                         // "GITHUB"
-                        signIn(providers.github?.id);
+                        signIn("github");
                       }}
                     />
                   </div>

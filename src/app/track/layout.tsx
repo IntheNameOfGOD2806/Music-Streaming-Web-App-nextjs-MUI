@@ -1,11 +1,11 @@
 "use client";
 import PrimarySearchAppBar from "@/components/home/AppBar";
 import Player from "@/components/Music/Player";
+import PlayerAuthor from "@/components/Music/Player.Author";
 import ThemeRegistry from "@/components/theme-registry/theme.registry";
 import { NextAuthWrapper } from "@/lib/next.auth.wrapper";
 import { TrackContextProvider } from "@/lib/TrackContext";
 // import "@etchteam/next-pagination/dist/index.css";
-import PlayerAuthor from "@/components/Music/Player.Author";
 import { AppProgressBar as ProgressBar } from "next-nprogress-bar";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

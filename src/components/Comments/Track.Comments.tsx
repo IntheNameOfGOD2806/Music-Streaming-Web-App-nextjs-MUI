@@ -4,13 +4,12 @@ import "./Track.Comments.scss";
 import { IComment, IComments } from "@/types/backend";
 import { getAvatar, sendRequest } from "@/utils/api";
 import { useSession } from "next-auth/react";
-import { ReactNode, useEffect, useState } from "react";
+import { cache, ReactNode, useEffect, useState } from "react";
 import { useContext } from "react";
 import TrackContext from "@/lib/TrackContext";
 import { ITrackContext } from "@/lib/TrackContext";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-
 const TrackComments = (props: { currentTime: string , trackDuration: number, setState: any, setSeekto: any}) => {
   // console.log("check current time::", props.currentTime);
   dayjs.extend(relativeTime);
@@ -22,12 +21,14 @@ const TrackComments = (props: { currentTime: string , trackDuration: number, set
     const res = await sendRequest<IBackendRes<IComments>>({
       url: `${
         process.env.NEXT_PUBLIC_BACKEND_URL
-      }api/v1/tracks/comments?current=1&pageSize=10&trackId=${track?._id}&sort=-createdAt`,
+      }api/v1/tracks/comments?current=1&pageSize=10&trackId=${track?._id}&sort=-createdAt` as string,
       method: "POST",
       headers: {
         Authorization: "Bearer " + session?.access_token, //the token is a variable which holds the token
-      }
-     
+      },
+      // nextOption:{
+      //   cache : "no-store"
+      // }
     });
     // console.log(res);
     if (res && res.data) {
@@ -114,7 +115,6 @@ useEffect(() => {
                         <div className="comment">{comment.content}</div>
                       </div>
                     </div>
-
                     <div className="right">
                       <p className="time">
                         {dayjs(comment.createdAt as string).fromNow()}

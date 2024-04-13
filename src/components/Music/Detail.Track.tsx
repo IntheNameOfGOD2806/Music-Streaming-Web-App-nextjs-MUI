@@ -6,11 +6,13 @@ import { sendRequest } from "@/utils/api";
 import { Container } from "@mui/material";
 import Button from "@mui/material/Button";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import { FaPlay } from "react-icons/fa";
 import { GoHeart, GoHeartFill } from "react-icons/go";
 import "./Detail.Track.scss";
 const DetailTrack = ({ params }: { params: { slug: string } }) => {
+  const router = useRouter();
   const { data: session } = useSession();
   // const searchParams = useSearchParams();
   const { slug } = params;
@@ -21,7 +23,8 @@ const DetailTrack = ({ params }: { params: { slug: string } }) => {
   const [state, setState] = useState(false);
   const [seekto, setSeekto] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
-
+  const [countPlay, setCountPlay] = useState(0);
+  const [countLike, setCountLike] = useState(0);
   const increaseView = async () => {
     const res = await sendRequest<any>({
       url: `${process.env.NEXT_PUBLIC_BACKEND_URL}api/v1/tracks/increase-view`,
@@ -35,11 +38,11 @@ const DetailTrack = ({ params }: { params: { slug: string } }) => {
     });
     // console.log(res);
     if (res && res.data) {
-      console.log("view plus 1");
     }
   };
   useEffect(() => {
     increaseView();
+    fetchCount();
   }, []);
   // console.log(">>>>check track::", track);
   const handleLikeTrack = async (quantity: number) => {
@@ -59,12 +62,18 @@ const DetailTrack = ({ params }: { params: { slug: string } }) => {
     if (res && res.data) {
       // re-render the component
       setIsLiked(!isLiked);
+      //revalidate the api in liked page
+      await sendRequest<any>({
+        url: `${process.env.NEXT_PUBLIC_NEXTFRONTEND_URL}api/revalidate?tag=liked&secret=${process.env.NEXT_PUBLIC_REVALIDATE_SECRET}`,
+        method: "POST",
+      });
+      // router.refresh();
       fetchCount();
     }
   };
   const checkIsLiked = async () => {
     const res = await getTrackLikedByUser();
-
+    //  console.log(res);
     if (
       res?.data.result
         .map(({ _id }: { _id: string }) => {
@@ -72,6 +81,7 @@ const DetailTrack = ({ params }: { params: { slug: string } }) => {
         })
         .includes(slug.trim() as string)
     ) {
+      // console.log("is liked");
       setIsLiked(true);
     }
   };
@@ -85,15 +95,13 @@ const DetailTrack = ({ params }: { params: { slug: string } }) => {
     });
     // console.log(res);
     if (res && res.data) {
-      setTrack({
-        ...track,
-        countLike: res.data.countLike,
-        countPlay: res.data.countPlay,
-      });
+      setCountPlay(res.data.countPlay as number);
+      setCountLike(res.data.countLike as number);
     }
     return res;
   };
   const getTrackLikedByUser = async () => {
+    console.log(session);
     const res = await sendRequest<any>({
       url: `${process.env.NEXT_PUBLIC_BACKEND_URL}api/v1/likes?current=1&pageSize=20`,
       method: "GET",
@@ -107,8 +115,8 @@ const DetailTrack = ({ params }: { params: { slug: string } }) => {
     return res;
   };
   useEffect(() => {
-    checkIsLiked();
-  }, []);
+    session && checkIsLiked();
+  }, [session]);
   return (
     <Container>
       <div className="track-banner-container">
@@ -166,10 +174,10 @@ const DetailTrack = ({ params }: { params: { slug: string } }) => {
         <div className="like-section-right">
           <div className="play-count">
             <FaPlay />
-            <span>{track.countPlay}</span>
+            <span>{countPlay}</span>
           </div>
           <div className="like-count">
-            <GoHeartFill fontSize={18} /> <span>{track.countLike}</span>
+            <GoHeartFill fontSize={18} /> <span>{countLike}</span>
           </div>
         </div>
       </section>

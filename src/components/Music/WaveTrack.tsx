@@ -12,6 +12,7 @@ import { useSearchParams } from "next/navigation";
 import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { WaveSurferOptions } from "wavesurfer.js";
 import "./WaveTrack.scss";
+import { Tag } from "@mui/icons-material";
 const WaveTrack = (props: {
   state: boolean;
   trackId: string;
@@ -66,7 +67,7 @@ const WaveTrack = (props: {
   const [arrComments, setArrComments] = useState<IComment[]>();
   const getComments = async () => {
     const res = await sendRequest<IBackendRes<IComments>>({
-      url: `${process.env.NEXT_PUBLIC_BACKEND_URL}api/v1/tracks/comments?current=1&pageSize=10&trackId=${track?._id}`,
+      url: `${process.env.NEXT_PUBLIC_BACKEND_URL}api/v1/tracks/comments?current=1&pageSize=10&trackId=${track?._id}&sort=-createdAt` as string,
       method: "POST",
       headers: {
         Authorization: "Bearer " + session?.access_token, //the token is a variable which holds the token
@@ -196,6 +197,9 @@ const WaveTrack = (props: {
     const res1 = await sendRequest<IBackendRes<ITrackTop>>({
       url: `${process.env.NEXT_PUBLIC_BACKEND_URL}api/v1/tracks/${props.trackId}`,
       method: "GET",
+      nextOption: {
+        next:{tags: ['getTrackDataById']},
+      }
     });
     if (res1 && res1.data) {
       setTrack({ ...res1.data, isPlaying: true });
@@ -270,7 +274,7 @@ const WaveTrack = (props: {
                       hover.style.opacity = "1";
                     }}
                     key={`comment-${index}`}
-                    src={`${getAvatar(session?.user.type as string)}`}
+                    src={`${getAvatar(item.user.type as string)}`}
                     alt=""
                   />
                 </Tooltip>

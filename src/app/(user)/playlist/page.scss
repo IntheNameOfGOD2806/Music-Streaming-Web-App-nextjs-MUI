@@ -1,0 +1,37 @@
+.playlist-section-wrapper {
+  background-color: rgb(241, 244, 244);
+  height: calc(max-content + 100px);
+  margin-top: 20px;
+  position: relative;
+  padding-bottom: 20px;
+
+  .playlist-section {
+    // background-color: rgb(219, 222, 12);
+    display: flex;
+
+    width: 90%;
+    padding-top: 40px;
+    margin-inline: auto;
+    justify-content: space-between;
+    align-items: center;
+    .playlist-section-sideButton {
+      display: flex;
+      gap: 10px;
+    }
+    .playlist-section-title {
+      font-weight: 800;
+    }
+  }
+  .playlist-section-divider {
+    hr {
+      margin-top: 32px;
+      width: 88%;
+      opacity: 0.3;
+    }
+  }
+  .playlist-accordion{
+    width: 88%;
+    margin-inline: auto;
+
+  }
+}

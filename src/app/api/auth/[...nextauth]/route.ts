@@ -3,11 +3,12 @@ import NextAuth, { AuthOptions } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GithubProvider from "next-auth/providers/github";
+import GoogleProvider from "next-auth/providers/google";
 export const authOptions: AuthOptions = {
 
 
     // Configure one or more authentication providers
-    secret: process.env.NO_SECRET,
+    secret: process.env.NEXTAUTH_SECRET,
     pages: {
         signIn: "/auth/signin",
     },
@@ -59,13 +60,17 @@ export const authOptions: AuthOptions = {
             clientId: process.env.GITHUB_ID!,
             clientSecret: process.env.GITHUB_SECRET!,
         }),
+        GoogleProvider({
+            clientId: process.env.GOOGLE_ID!,
+            clientSecret: process.env.GOOGLE_SECRET!,
+        }),
 
 
 
     ],
     callbacks: {
         jwt: async ({ token, user, account, profile, trigger }) => {
-        //    console.log("hello there");
+            //    console.log("hello there");
             // console.log(token, user, account, profile, trigger);
             if (trigger === "signIn" && account?.provider !== "credentials") {
                 const res = await sendRequest<IBackendRes<JWT>>(

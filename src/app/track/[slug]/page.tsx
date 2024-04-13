@@ -3,7 +3,7 @@ import DetailTrack from "@/components/Music/Detail.Track";
 import { sendRequest } from "@/utils/api";
 import type { Metadata, ResolvingMetadata } from "next";
 import { getServerSession } from "next-auth";
-import slugify from "slugify";
+
 type Props = {
   params: { slug: string };
   searchParams: { [key: string]: string | string[] | undefined };
@@ -37,19 +37,28 @@ export async function generateMetadata(
   return {
     title: `${await getTrackTitle()}`,
     openGraph: {
-      title: "Hỏi Dân IT",
+      title: "dattran.dev",
       description: "Beyond Your Coding Skills",
       type: "website",
 
-      images: [
-        ` https://source.unsplash.com/random`,
-      ],
+      images: [` https://source.unsplash.com/random`],
     },
   };
 }
+export async function generateStaticParams() {
+  return [
+    { slug: "65a4cf1e41de8940d341970b".trim() as string },
+    { slug: "65a4cf1e41de8940d341970a".trim() as string },
+    { slug: "65a4cf1e41de8940d341970d".trim() as string },
+  ];
+}
 const DetailTrackPage = async ({ params }: { params: { slug: string } }) => {
+ 
+  const { slug } = params;
+  // console.log("check slug:", slug);
   return (
     <>
+    <div style={{display:"none",visibility:"hidden"}}>{slug}</div>
       <DetailTrack params={params} />
     </>
   );

@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import Link from "next/link";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
@@ -6,6 +7,7 @@ import "slick-carousel/slick/slick.css";
 import Arrow from "../navbutton/arrow";
 import "./carousel.scss";
 import "./trackCarousel.scss";
+
 function SampleNextArrow(props: any) {
   const { className, style, onClick } = props;
   return (
@@ -61,14 +63,31 @@ const TrackCarousel = (props: Iprops) => {
         {props &&
           props.data.length > 0 &&
           props.data.map((item) => {
+            const myLoader = ({ src }: any) => {
+              return `${process.env.NEXT_PUBLIC_BACKEND_URL}/images/${item.imgUrl}`;
+            };
             return (
               <div key={item._id} className="carousel-track-element">
                 <div>
-                  <img
+                  {/* <img
                     src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/images/${item.imgUrl}`}
                     alt=""
-                  />
-                  <Link href={`/track/${item._id}?audio=${item.trackUrl}`} style={{ textDecoration: "none" }}>
+                  /> */}
+                  <div style={{ position: "relative" ,width:"100%",height:"190px"}}>
+                    <Image
+                      src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/images/${item.imgUrl}`}
+                      alt=" track imgage"
+                      loader={myLoader}
+                      fill
+                      objectFit="contain"
+                      style={{ borderRadius: "10px",height:"100%",width:"100%",left:"-3px" }}
+                    />
+                  </div>
+
+                  <Link
+                    href={`/track/${item._id}?audio=${item.trackUrl}`}
+                    style={{ textDecoration: "none" }}
+                  >
                     <p>{item.title}</p>
                   </Link>
                   <p>{item.description}</p>

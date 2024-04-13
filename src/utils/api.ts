@@ -21,6 +21,7 @@ export const sendRequest = async <T>(optionsP: IRequest) => {
     };
     if (useCredentials) options.credentials = "include";
     if (queryParams) {
+        // console.log(queryParams);
         // url = `${url}?${queryString.stringify(queryParams)}`;
         // console.log(url);
     }
