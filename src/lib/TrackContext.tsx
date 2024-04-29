@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { ITrackTopCustom } from "@/types/backend";
 import React, { useState } from "react";
 
@@ -28,13 +28,13 @@ export const initValue = {
   isPlaying: false,
 };
 
- const DEFAULT_TRACK: ITrackContext = {
+const DEFAULT_TRACK: ITrackContext = {
   track: initValue,
   setTrack: () => {},
 };
 
 const TrackContext = React.createContext<ITrackContext>(DEFAULT_TRACK);
-
+export default TrackContext;
 export const TrackContextProvider: React.FC<{ children: any }> = ({
   children,
 }) => {
@@ -52,5 +52,3 @@ export const TrackContextProvider: React.FC<{ children: any }> = ({
     <TrackContext.Provider value={values}>{children}</TrackContext.Provider>
   );
 };
-
-export default TrackContext;

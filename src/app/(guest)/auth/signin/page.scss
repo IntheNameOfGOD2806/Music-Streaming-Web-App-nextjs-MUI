@@ -2,7 +2,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 .auth-form-container {
   margin-top: 25px;
@@ -21,16 +20,14 @@
     // background-color: aqua;
     margin-top: 10px;
     .header-logo {
-     
-     display: flex;
+      display: flex;
       justify-content: center;
       align-items: center;
-     
+
       border-radius: 50%;
       width: 40px;
       height: 40px;
       background-color: rgb(238, 231, 231);
-     
     }
     h2 {
       bottom: -10px;
@@ -44,25 +41,24 @@
     display: flex;
     align-items: center;
     text-align: center;
-    
   }
-  
+
   .separator::before,
   .separator::after {
-    content: '';
+    content: "";
     flex: 1;
     border-bottom: 1px solid #000;
     opacity: 0.1;
   }
-  
+
   .separator:not(:empty)::before {
-    margin-right: .25em;
+    margin-right: 0.25em;
   }
-  
+
   .separator:not(:empty)::after {
-    margin-left: .25em;
+    margin-left: 0.25em;
   }
-  .auth-form-footer{
+  .auth-form-footer {
     margin-top: 10px;
 
     width: 100%;
@@ -70,17 +66,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    .footer-logos{
-
+    .footer-logos {
+      margin-bottom: 10px;
       display: flex;
       justify-content: center;
       align-items: center;
       row-gap: 15px;
 
-      .google-icon,.github-icon{
+      .google-icon,
+      .github-icon {
         font-size: 40px;
       }
     }
-    
   }
 }

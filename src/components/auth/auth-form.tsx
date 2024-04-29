@@ -24,7 +24,7 @@ function CustomizedSnackbars(props: any) {
     if (reason === "clickaway") {
       return;
     }
-    //set message null to unmount the snackbar 
+    //set message null to unmount the snackbar
     props.setMsg("");
   };
 
@@ -180,10 +180,15 @@ export default function AuthForm({ providers }: any) {
               <div className="separator">Or Using</div>
               <div className="auth-form-footer">
                 <div className="footer-logos">
-                  <div className="google-icon">
-                    <FcGoogle onClick={() => signIn("google")} />
+                  <div style={{ cursor: "pointer" }} className="google-icon">
+                    <FcGoogle
+                      onClick={(e) => {
+                        e.preventDefault();
+                        signIn("google");
+                      }}
+                    />
                   </div>
-                  <div className="github-icon">
+                  <div style={{ cursor: "pointer" }} className="github-icon">
                     <FaGithub
                       onClick={(e) => {
                         e.preventDefault();

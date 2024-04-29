@@ -85,14 +85,14 @@ export const getAvatar = (type: string) => {
 
     }
     else if (type === "GOOGLE") {
-        return "/assets/images/default_avatar.avif"
+        return "/assets/images/google.png"
 
     }
     return "/assets/images/default_avatar.avif"
 
 }
 export const convertToSlug = (str: string) => {
-    if(!str) return "";
+    if (!str) return "";
     let newStr = "";
     return newStr = slugify(str, { lower: true, strict: true, locale: "vi" })
 }

@@ -62,13 +62,13 @@ const DetailTrack = ({ params }: { params: { slug: string } }) => {
     if (res && res.data) {
       // re-render the component
       setIsLiked(!isLiked);
+      fetchCount();
       //revalidate the api in liked page
       await sendRequest<any>({
         url: `${process.env.NEXT_PUBLIC_NEXTFRONTEND_URL}api/revalidate?tag=liked&secret=${process.env.NEXT_PUBLIC_REVALIDATE_SECRET}`,
         method: "POST",
       });
       // router.refresh();
-      fetchCount();
     }
   };
   const checkIsLiked = async () => {
@@ -95,13 +95,14 @@ const DetailTrack = ({ params }: { params: { slug: string } }) => {
     });
     // console.log(res);
     if (res && res.data) {
+      console.log(res.data.countPlay, res.data.countLike);
       setCountPlay(res.data.countPlay as number);
       setCountLike(res.data.countLike as number);
     }
     return res;
   };
   const getTrackLikedByUser = async () => {
-    console.log(session);
+    // console.log(session);
     const res = await sendRequest<any>({
       url: `${process.env.NEXT_PUBLIC_BACKEND_URL}api/v1/likes?current=1&pageSize=20`,
       method: "GET",

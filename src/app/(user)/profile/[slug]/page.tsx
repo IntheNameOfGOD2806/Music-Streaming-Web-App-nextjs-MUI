@@ -36,6 +36,7 @@ const profilePage = async ({
     <>
       <Container>
         <div className="music-tracks-container">
+          {tracks?.data?.result?.length === 0 && <p>No tracks found</p>}
           {/* @ts-ignore */}
           {tracks &&
             // @ts-ignore

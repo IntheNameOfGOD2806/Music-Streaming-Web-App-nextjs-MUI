@@ -1,4 +1,5 @@
 "use client";
+import { getAvatar } from "@/utils/api";
 import Logout from "@mui/icons-material/Logout";
 import PersonAdd from "@mui/icons-material/PersonAdd";
 import Settings from "@mui/icons-material/Settings";
@@ -13,9 +14,8 @@ import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import * as React from "react";
 import { useRouter } from "next/navigation";
-import { getAvatar } from "@/utils/api";
+import * as React from "react";
 
 export default function AccountMenu() {
   const { data: session } = useSession();
@@ -27,10 +27,7 @@ export default function AccountMenu() {
 
   const navigate = useRouter();
   const handleNavigateProfile = () => {
-    
-     
-      navigate.push("/profile/" + session?.user?._id);
-    
+    navigate.push("/profile/" + session?.user?._id);
   };
   const handleClose = () => {
     setAnchorEl(null);
@@ -40,66 +37,67 @@ export default function AccountMenu() {
   return (
     <React.Fragment>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
-       {session &&
-       <>
-        <Typography sx={{ minWidth: 100, ":hover": { opacity: "0.5" } }}>
-          {" "}
-          <Link
-            style={{ textDecoration: "none", color: "white" }}
-            href="/playlist"
-          >
-            PlayList
-          </Link>
-        </Typography>
-        <Typography sx={{ minWidth: 100, ":hover": { opacity: "0.5" } }}>
-          {" "}
-          <Link
-            style={{ textDecoration: "none", color: "white" }}
-            href="/liked"
-          >
-            Liked
-          </Link>
-        </Typography>
-        <Typography sx={{ minWidth: 100, ":hover": { opacity: "0.5" } }}>
-          {" "}
-          <Link
-            style={{ textDecoration: "none", color: "white" }}
-            href="/track/upload"
-          >
-            Upload
-          </Link>
-        </Typography>
-       </>
-       }
-       {
-        !session &&
-        <Typography sx={{ minWidth: 100, ":hover": { opacity: "0.5" } }}>
-          {" "}
-          <Link
-            style={{ textDecoration: "none", color: "white" }}
-            href="/api/auth/signin"
-          >
-            Login
-          </Link>
-        </Typography>
-       }
-
-        <Tooltip title="Account settings">
-          <IconButton
-            onClick={handleClick}
-            size="small"
-            sx={{ ml: 2 }}
-            aria-controls={open ? "account-menu" : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? "true" : undefined}
-          >
-            <Avatar
-            src={`${getAvatar(session?.user.type as string)}`}
-            sx={{ width: 32, height: 32 }}>
-              {/* <img style={{objectFit:"contain"}} src={getAvatar("GOOGLE")} alt="" /> */}
-            </Avatar>
-          </IconButton>
-        </Tooltip>
+        {session && (
+          <>
+            <Typography sx={{ minWidth: 100, ":hover": { opacity: "0.5" } }}>
+              {" "}
+              <Link
+                style={{ textDecoration: "none", color: "white" }}
+                href="/playlist"
+              >
+                PlayList
+              </Link>
+            </Typography>
+            <Typography sx={{ minWidth: 100, ":hover": { opacity: "0.5" } }}>
+              {" "}
+              <Link
+                style={{ textDecoration: "none", color: "white" }}
+                href="/liked"
+              >
+                Liked
+              </Link>
+            </Typography>
+            <Typography sx={{ minWidth: 100, ":hover": { opacity: "0.5" } }}>
+              {" "}
+              <Link
+                style={{ textDecoration: "none", color: "white" }}
+                href="/track/upload"
+              >
+                Upload
+              </Link>
+            </Typography>
+          </>
+        )}
+        {!session && (
+          <Typography sx={{ minWidth: 100, ":hover": { opacity: "0.5" } }}>
+            {" "}
+            <Link
+              style={{ textDecoration: "none", color: "white" }}
+              href="/api/auth/signin"
+            >
+              Login
+            </Link>
+          </Typography>
+        )}
+        {session && (
+          <Tooltip title="Account settings">
+            <IconButton
+              onClick={handleClick}
+              size="small"
+              sx={{ ml: 2 }}
+              aria-controls={open ? "account-menu" : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? "true" : undefined}
+            >
+              <Avatar
+                src={`${getAvatar(session?.user.type as string)}`}
+                sx={{ width: 32, height: 32 }}
+              >
+                {/* <img style={{objectFit:"contain"}} src={getAvatar("GOOGLE")} alt="" /> */}
+              </Avatar>
+            </IconButton>
+          </Tooltip>
+        )}
       </Box>
       <Menu
         anchorEl={anchorEl}
@@ -137,25 +135,12 @@ export default function AccountMenu() {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem onClick={handleNavigateProfile}>
-          <Avatar /> Profile
+          <Avatar /> Your Musics
         </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <Avatar /> My account
-        </MenuItem>
+
         <Divider />
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <PersonAdd fontSize="small" />
-          </ListItemIcon>
-          Add another account
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <Settings fontSize="small" />
-          </ListItemIcon>
-          Settings
-        </MenuItem>
-        <MenuItem onClick={ () => signOut()}>
+
+        <MenuItem onClick={() => signOut()}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>

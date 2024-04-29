@@ -73,18 +73,30 @@ const TrackCarousel = (props: Iprops) => {
                     src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/images/${item.imgUrl}`}
                     alt=""
                   /> */}
-                  <div style={{ position: "relative" ,width:"100%",height:"190px"}}>
+                  <div
+                    style={{
+                      position: "relative",
+                      width: "100%",
+                      height: "190px",
+                    }}
+                  >
                     <Image
                       src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/images/${item.imgUrl}`}
                       alt=" track imgage"
                       loader={myLoader}
                       fill
                       objectFit="contain"
-                      style={{ borderRadius: "10px",height:"100%",width:"100%",left:"-3px" }}
+                      style={{
+                        borderRadius: "10px",
+                        height: "100%",
+                        width: "100%",
+                        left: "-3px",
+                      }}
                     />
                   </div>
 
                   <Link
+                    // api route of nextJS
                     href={`/track/${item._id}?audio=${item.trackUrl}`}
                     style={{ textDecoration: "none" }}
                   >
