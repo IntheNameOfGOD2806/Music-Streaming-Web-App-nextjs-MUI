@@ -83,6 +83,9 @@ function BasicSelect(props: IpropsSelect) {
           <MenuItem value={props.category[1].value}>
             {props.category[1].label}
           </MenuItem>
+          <MenuItem value={props.category[2].value}>
+            {props.category[2].label}
+          </MenuItem>
         </Select>
       </FormControl>
     </Box>
@@ -150,11 +153,9 @@ const Step2 = (props: any) => {
           Authorization: `Bearer ${session?.access_token}`,
         },
       });
-      if(res1.data)
-      {
+      if (res1.data) {
         toast.success("Upload Track success");
-      }
-      else if(!res1.data){
+      } else if (!res1.data) {
         // @ts-ignore
         // alert(res1?.message);
         toast.error(`${res1?.message}`, {
@@ -200,6 +201,10 @@ const Step2 = (props: any) => {
       value: "WORKOUT",
       label: "WORKOUT",
     },
+    {
+      value: "PARTY",
+      label: "PARTY",
+    },
   ];
   return (
     <>
@@ -209,10 +214,7 @@ const Step2 = (props: any) => {
         <section className="upload-infor">
           <div className="image-uploader">
             <figure className="image-box">
-            {imagePreview &&
-
-              <img src={imagePreview} alt="preview" />
-            }
+              {imagePreview && <img src={imagePreview} alt="preview" />}
             </figure>
             <div style={{ width: "80%", overflow: "clip", fontSize: "12px" }}>
               {imagePreviewName}
@@ -236,7 +238,7 @@ const Step2 = (props: any) => {
                     handleChangeImage(e);
                   }}
                 />
-                Upload file
+                Upload Track's Image
               </Button>
             </label>
           </div>

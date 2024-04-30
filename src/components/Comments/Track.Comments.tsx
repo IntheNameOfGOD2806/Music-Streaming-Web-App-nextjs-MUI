@@ -10,7 +10,12 @@ import TrackContext from "@/lib/TrackContext";
 import { ITrackContext } from "@/lib/TrackContext";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-const TrackComments = (props: { currentTime: string , trackDuration: number, setState: any, setSeekto: any}) => {
+const TrackComments = (props: {
+  currentTime: string;
+  trackDuration: number;
+  setState: any;
+  setSeekto: any;
+}) => {
   // console.log("check current time::", props.currentTime);
   dayjs.extend(relativeTime);
   const { track, setTrack } = useContext(TrackContext) as ITrackContext;
@@ -19,9 +24,7 @@ const TrackComments = (props: { currentTime: string , trackDuration: number, set
   const [arrComments, setArrComments] = useState<IComment[]>();
   const getComments = async () => {
     const res = await sendRequest<IBackendRes<IComments>>({
-      url: `${
-        process.env.NEXT_PUBLIC_BACKEND_URL
-      }api/v1/tracks/comments?current=1&pageSize=10&trackId=${track?._id}&sort=-createdAt` as string,
+      url: `${process.env.NEXT_PUBLIC_BACKEND_URL}api/v1/tracks/comments?current=1&pageSize=10&trackId=${track?._id}&sort=-createdAt` as string,
       method: "POST",
       headers: {
         Authorization: "Bearer " + session?.access_token, //the token is a variable which holds the token
@@ -35,9 +38,9 @@ const TrackComments = (props: { currentTime: string , trackDuration: number, set
       setArrComments(res.data.result as IComment[]);
     }
   };
-useEffect(() => {
-  getComments();
-},[track._id,track.title,track.description,track.trackUrl]);
+  useEffect(() => {
+    getComments();
+  }, [track._id, track.title, track.description, track.trackUrl]);
   const postComment = async () => {
     if (!comment) {
       return;
@@ -83,17 +86,19 @@ useEffect(() => {
           <div className="comment-left">
             <div className="user-section">
               <div className="avatar-image">
-                <img src="https://source.unsplash.com/random" alt="" />
+                <img src={getAvatar(session?.user?.type as string)} alt="" />
               </div>
-              <div style={{textAlign: "center"}} className="user-gmail">{session?.user?.email}</div>
+              <div style={{ textAlign: "center" }} className="user-gmail">
+                {session?.user?.email}
+              </div>
             </div>
           </div>
           <div className="comment-right">
             <div className="track-comment-section">
               {arrComments?.map((comment): any => {
                 var date = new Date(0);
-                date.setSeconds(props.trackDuration*comment.moment/100);// specify value for SECONDS here
-                var timeString = date.toISOString().substring(11, 19); 
+                date.setSeconds((props.trackDuration * comment.moment) / 100); // specify value for SECONDS here
+                var timeString = date.toISOString().substring(11, 19);
                 return (
                   <div className="comment-section-element">
                     <div
@@ -107,11 +112,17 @@ useEffect(() => {
                         />
                       </div>
                       <div className="info-section">
-                        <div style={{display: "flex"}} className="gmail">{comment.user.email}-
-                        <span onClick={
-                          ()=>{props.setSeekto(comment.moment as number)}
-                          } style={{opacity: "0.5",cursor: "pointer"}}>{timeString}</span>
-                         </div>
+                        <div style={{ display: "flex" }} className="gmail">
+                          {comment.user.email}-
+                          <span
+                            onClick={() => {
+                              props.setSeekto(comment.moment as number);
+                            }}
+                            style={{ opacity: "0.5", cursor: "pointer" }}
+                          >
+                            {timeString}
+                          </span>
+                        </div>
                         <div className="comment">{comment.content}</div>
                       </div>
                     </div>

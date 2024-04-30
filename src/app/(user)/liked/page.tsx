@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
 import "./page.scss";
+import { cache } from "react";
 export const metadata: Metadata = {
   title: "Liked Page",
   description: "All tracks liked by user",
@@ -17,7 +18,9 @@ const likedPage = async () => {
     headers: {
       Authorization: "Bearer " + session?.access_token, //the token is a variable which holds the token
     },
+    
     nextOption: {
+      // cache: "no-store",
       next: { tags: ["liked"] },
     },
   });
@@ -35,19 +38,17 @@ const likedPage = async () => {
               likedTracks.data?.result?.map((track: ITrackTop) => {
                 return (
                   <>
-                  <Link href={`/track/${track._id}?audio=${track.trackUrl}`}>
-                   <div className="liked-section-item">
-                      <img
-                        src={`${process.env.NEXT_PUBLIC_BACKEND_URL}images/${track.imgUrl}`}
-                        alt=""
-                      />
-                      <div className="liked-section-item-title">
-                        {track.title}
+                    <Link href={`/track/${track._id}?audio=${track.trackUrl}`}>
+                      <div className="liked-section-item">
+                        <img
+                          src={`${process.env.NEXT_PUBLIC_BACKEND_URL}images/${track.imgUrl}`}
+                          alt=""
+                        />
+                        <div className="liked-section-item-title">
+                          {track.title}
+                        </div>
                       </div>
-                    </div>
-                  
-                  </Link>
-                   
+                    </Link>
                   </>
                   /////
                 );

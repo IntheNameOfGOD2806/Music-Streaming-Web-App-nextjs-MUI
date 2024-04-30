@@ -12,12 +12,15 @@ import { useContext } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../layout.scss";
+import { usePathname } from "next/navigation";
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
   const { track, setTrack } = useContext(TrackContext) as ITrackContext;
+  console.log("check router::", pathname);
   return (
     <html lang="en">
       <body>
@@ -35,13 +38,21 @@ export default function RootLayout({
             <TrackContextProvider>
               {children}
               {/* music player */}
-              {track.isPlaying && (
-                <div className="music-player">
-                  <div style={{ display: "flex" }}>
-                    <Player />
-                    <PlayerAuthor></PlayerAuthor>
-                  </div>
+              {pathname.includes("/playlist")  && (
+              <div className="music-player">
+                <div style={{ display: "flex" }}>
+                  <Player />
+                  <PlayerAuthor></PlayerAuthor>
                 </div>
+              </div>
+              )}
+               {pathname.includes("/profile")  && (
+              <div className="music-player">
+                <div style={{ display: "flex" }}>
+                  <Player />
+                  <PlayerAuthor></PlayerAuthor>
+                </div>
+              </div>
               )}
             </TrackContextProvider>
           </NextAuthWrapper>

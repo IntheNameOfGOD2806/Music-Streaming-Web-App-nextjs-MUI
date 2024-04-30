@@ -20,7 +20,6 @@ const WaveTrack = (props: {
   setTrackDuration: any;
   seekto: number;
 }) => {
- 
   const { data: session } = useSession();
   const { track, setTrack } = useContext(TrackContext) as ITrackContext;
   const searchParams = useSearchParams();
@@ -198,8 +197,8 @@ const WaveTrack = (props: {
       url: `${process.env.NEXT_PUBLIC_BACKEND_URL}api/v1/tracks/${props.trackId}`,
       method: "GET",
       nextOption: {
-        next:{tags: ['getTrackDataById']},
-      }
+        next: { tags: ["getTrackDataById"] },
+      },
     });
     if (res1 && res1.data) {
       setTrack({ ...res1.data, isPlaying: true });

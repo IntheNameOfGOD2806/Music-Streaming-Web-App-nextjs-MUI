@@ -40,7 +40,7 @@ function a11yProps(index: number) {
   };
 }
 
-function BasicTabs(props:any) {
+function BasicTabs(props: any) {
   const [value, setValue] = React.useState(0);
   const [nextStep, setNextStep] = React.useState<boolean>(true);
   const [trackUploadInfo, setTrackUploadInfo] = React.useState({
@@ -68,9 +68,13 @@ function BasicTabs(props:any) {
           onChange={handleChange}
           aria-label="basic tabs example"
         >
-          <Tab label=" TRACKS" {...a11yProps(0)} disabled={!nextStep} />
+          <Tab 
+          label=" TRACKS" 
+          {...a11yProps(0)} 
+          disabled={!nextStep} 
+          />
           <Tab
-            label="  BASIC INFORMATION"
+            label="BASIC INFORMATION"
             {...a11yProps(1)}
             disabled={nextStep}
           />

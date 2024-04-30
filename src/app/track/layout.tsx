@@ -10,11 +10,13 @@ import { AppProgressBar as ProgressBar } from "next-nprogress-bar";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../layout.scss";
+import { usePathname } from "next/navigation";
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
   return (
     <html lang="en">
       <body>
@@ -32,12 +34,12 @@ export default function RootLayout({
             <TrackContextProvider>
               {children}
               {/* music player */}
-              <div className="music-player">
+             {!pathname.includes("upload") && <div className="music-player">
                 <div style={{ display: "flex" }}>
                   <Player />
                   <PlayerAuthor></PlayerAuthor>
                 </div>
-              </div>
+              </div>}
             </TrackContextProvider>
           </NextAuthWrapper>
         </ThemeRegistry>

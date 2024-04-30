@@ -56,7 +56,9 @@ function StyledDropzone(props: any) {
     async (acceptedFiles: FileWithPath[]) => {
       //do something with the files
       if (acceptedFiles && acceptedFiles[0]) {
+        // blur the step 1 tab
         props.setNextStep(false);
+        // set step 2
         props.setValue(1);
         const audio = acceptedFiles[0];
         const formData = new FormData();

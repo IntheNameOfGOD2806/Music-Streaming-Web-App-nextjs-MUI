@@ -11,6 +11,8 @@ import { useContext, useEffect, useState } from "react";
 import { FaPlay } from "react-icons/fa";
 import { GoHeart, GoHeartFill } from "react-icons/go";
 import "./Detail.Track.scss";
+import { revalidateTag } from "next/cache";
+import actionRevaliDateLikedTag from "@/app/actions";
 const DetailTrack = ({ params }: { params: { slug: string } }) => {
   const router = useRouter();
   const { data: session } = useSession();
@@ -46,6 +48,10 @@ const DetailTrack = ({ params }: { params: { slug: string } }) => {
   }, []);
   // console.log(">>>>check track::", track);
   const handleLikeTrack = async (quantity: number) => {
+    if (!session) {
+      router.push("/auth/signin");
+      return;
+    }
     const res = await sendRequest<any>({
       url: `${process.env.NEXT_PUBLIC_BACKEND_URL}api/v1/likes`,
       method: "POST",
@@ -61,13 +67,14 @@ const DetailTrack = ({ params }: { params: { slug: string } }) => {
     // console.log(res);
     if (res && res.data) {
       // re-render the component
+      await actionRevaliDateLikedTag();
       setIsLiked(!isLiked);
       fetchCount();
       //revalidate the api in liked page
-      await sendRequest<any>({
-        url: `${process.env.NEXT_PUBLIC_NEXTFRONTEND_URL}api/revalidate?tag=liked&secret=${process.env.NEXT_PUBLIC_REVALIDATE_SECRET}`,
-        method: "POST",
-      });
+      // await sendRequest<any>({
+      //   url: `${process.env.NEXT_PUBLIC_NEXTFRONTEND_URL}api/revalidate?tag=liked&secret=${process.env.NEXT_PUBLIC_REVALIDATE_SECRET}`,
+      //   method: "POST",
+      // });
       // router.refresh();
     }
   };
@@ -122,6 +129,7 @@ const DetailTrack = ({ params }: { params: { slug: string } }) => {
     <Container>
       <div className="track-banner-container">
         <div className="wavetrack-container">
+          {/* wave track */}
           <WaveTrack
             seekto={seekto}
             state={state}

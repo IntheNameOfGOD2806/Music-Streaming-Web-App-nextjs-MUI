@@ -1,5 +1,5 @@
-import { NextRequest } from "next/server";
 import { revalidateTag } from "next/cache";
+import { NextRequest } from "next/server";
 
 export async function POST(request: NextRequest) {
     const secret = request.nextUrl.searchParams.get('secret');
@@ -10,6 +10,6 @@ export async function POST(request: NextRequest) {
     if (!tag) {
         return new Response('Invalid tag', { status: 401 })
     }
-    revalidateTag(tag);
+    revalidateTag(String(tag));
     return new Response('Revalidated', { status: 200 })
 }

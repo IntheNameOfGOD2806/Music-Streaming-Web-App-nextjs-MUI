@@ -1,23 +1,23 @@
 "use client";
 import { sendRequest } from "@/utils/api";
+import { Chip } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import Checkbox from "@mui/material/Checkbox";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
+import ListItemText from "@mui/material/ListItemText";
 import MenuItem from "@mui/material/MenuItem";
+import OutlinedInput from "@mui/material/OutlinedInput";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useSession } from "next-auth/react";
-import * as React from "react";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import Checkbox from "@mui/material/Checkbox";
-import ListItemText from "@mui/material/ListItemText";
 import { useRouter } from "next/navigation";
+import * as React from "react";
 import { toast } from "react-toastify";
-import { Chip } from "@mui/material";
 interface IUpdatePlayListInfo {
   id: string;
   title: string;
@@ -79,8 +79,12 @@ function MultipleSelectCheckmarks(props: any) {
           input={<OutlinedInput label="Select tracks" />}
           renderValue={(selected) =>
             // selected.map((v) => v.split("-")[1]).join(",")
-            selected.map((v) => <Chip sx={{ maxWidth: "100px",textOverflow: "ellipsis" }} label={v.split("-")[1]} />)
-
+            selected.map((v) => (
+              <Chip
+                sx={{ maxWidth: "100px", textOverflow: "ellipsis" }}
+                label={v.split("-")[1]}
+              />
+            ))
           }
           MenuProps={MenuProps}
         >
@@ -153,8 +157,11 @@ export default function AddTrackDialog(props: any) {
       },
       body: updatePlaylistInfo,
     });
-    if (res && res.data) {
-      toast.success("Add tracks success");
+    if (res && res.statusCode === 200 && res.data) {
+      console.log(res);
+      toast.success(res.message);
+    } else {
+      toast.error(res.message);
     }
   };
   const router = useRouter();
