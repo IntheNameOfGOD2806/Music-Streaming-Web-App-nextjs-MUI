@@ -71,8 +71,8 @@ export const authOptions: AuthOptions = {
     callbacks: {
         jwt: async ({ token, user, account, profile, trigger }) => {
             //    console.log("hello there");
-            // console.log(token, user, account, profile, trigger);
             if (trigger === "signIn" && account?.provider !== "credentials") {
+                console.log(token, user, account, profile, trigger);
                 const res = await sendRequest<IBackendRes<JWT>>(
                     {
                         url: `${process.env.NEXT_PUBLIC_BACKEND_URL}api/v1/auth/social-media`,
@@ -83,6 +83,7 @@ export const authOptions: AuthOptions = {
                 )
 
                 if (res.data) {
+                    console.log(res.data);
                     token.access_token = res.data.access_token
                     token.refresh_token = res.data.refresh_token
                     token.user = res.data?.user

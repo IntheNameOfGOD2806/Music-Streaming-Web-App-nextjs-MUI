@@ -90,7 +90,7 @@ export default function AccountMenu() {
               aria-expanded={open ? "true" : undefined}
             >
               <Avatar
-                src={`${getAvatar(session?.user.type as string)}`}
+                src={`${  getAvatar(session?.user.type as string)}`}
                 sx={{ width: 32, height: 32 }}
               >
                 {/* <img style={{objectFit:"contain"}} src={getAvatar("GOOGLE")} alt="" /> */}

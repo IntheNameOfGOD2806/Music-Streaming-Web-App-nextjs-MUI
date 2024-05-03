@@ -161,7 +161,8 @@ export default function AddTrackDialog(props: any) {
       console.log(res);
       toast.success(res.message);
     } else {
-      toast.error(res.message);
+     
+      toast.info(res.message.join(","));
     }
   };
   const router = useRouter();

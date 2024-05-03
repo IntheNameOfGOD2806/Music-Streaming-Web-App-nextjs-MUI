@@ -1,4 +1,5 @@
 "use client";
+import actionRevaliDateLikedTag from "@/app/actions";
 import TrackComments from "@/components/Comments/Track.Comments";
 import WaveTrack from "@/components/Music/WaveTrack";
 import TrackContext, { ITrackContext } from "@/lib/TrackContext";
@@ -11,8 +12,6 @@ import { useContext, useEffect, useState } from "react";
 import { FaPlay } from "react-icons/fa";
 import { GoHeart, GoHeartFill } from "react-icons/go";
 import "./Detail.Track.scss";
-import { revalidateTag } from "next/cache";
-import actionRevaliDateLikedTag from "@/app/actions";
 const DetailTrack = ({ params }: { params: { slug: string } }) => {
   const router = useRouter();
   const { data: session } = useSession();
@@ -192,12 +191,19 @@ const DetailTrack = ({ params }: { params: { slug: string } }) => {
       </section>
 
       <Container>
-        <TrackComments
-          setSeekto={setSeekto}
-          setState={setState}
-          currentTime={currentTime}
-          trackDuration={trackDuration}
-        />
+        {!session && (
+           <Container><span
+           style={{color:"red",fontSize:"20px",marginTop:"60px",textAlign:"center"}}
+           >-----Please login to use this comment feature----</span></Container>
+        )}
+        {session && (
+          <TrackComments
+            setSeekto={setSeekto}
+            setState={setState}
+            currentTime={currentTime}
+            trackDuration={trackDuration}
+          />
+        )}
       </Container>
     </Container>
   );
