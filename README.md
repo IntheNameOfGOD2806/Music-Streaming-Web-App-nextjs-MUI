@@ -31,7 +31,7 @@ A  music application built with NextJS and MUI
 - **Like track that you enjoy:** Easily mark favorite tracks with a like feature, ensuring swift access to the tunes that resonate most.
 
 ------------------------------------------------------------------------------------------------------------------------------------------
-Các bước cần làm:
+
 
 1. Clone dự án
 2. Cài đặt các thư viện cần thiết: npm i
