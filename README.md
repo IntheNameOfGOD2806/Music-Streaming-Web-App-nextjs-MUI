@@ -3,7 +3,7 @@
 # Project Overview
 
 ## Description
-An  music application built with NextJS and MUI 
+A  music application built with NextJS and MUI 
 
 ## Technologies
 
